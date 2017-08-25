@@ -2,4 +2,7 @@
 import '../css/style.scss';
 
 // Include google analytics
-import '../js/ga.js';
+import './ga.js';
+
+
+import './app.jsx';
