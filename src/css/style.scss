@@ -1,4 +1,3 @@
-// scss-lint:disable indentation
 $page-background: #e0e0e0;
 $page-font: #000;
 $main-content-background: #fff;
@@ -47,6 +46,24 @@ main {
 		text-align: center;
   }
 
+	h2 {
+		font-size: 2.5vw;
+		font-weight: normal;
+		margin: 0 0 .5em;
+		text-align: center;
+	}
+
+	h3 {
+		font-size: 2vw;
+		font-weight: normal;
+		margin: 0 0 .4em;
+		text-align: center;
+	}
+
+	.bold {
+		font-weight: bold;
+	}
+
 	.result {
 		align-items: center;
 		display: flex;
@@ -63,6 +80,10 @@ main {
 			height: 20vw;
 			max-height: 250px;
     }
+
+		figcaption {
+			display: none;
+		}
   }
 
 	.count {
