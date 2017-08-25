@@ -11,6 +11,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 // Store prod path
 const Prod_Path = path.resolve(__dirname, '../dist');
+// Add gzip support
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = Merge(CommonConfig, {
 	output: {
@@ -20,12 +22,19 @@ module.exports = Merge(CommonConfig, {
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: path.resolve(__dirname, '../src/template.ejs'),
-			inject: 'head',
+			inject: 'body',
 			minify: {
 				collapseWhitespace: true,
 				maxLineLength: 80,
 				removeScriptTypeAttributes: true
 			}
+		}),
+		new CompressionPlugin({
+			asset: '[path].gz[query]',
+			algorithm: 'gzip',
+			test: /\.js$|\.css$|\.html$/,
+			threshold: 10240,
+			minRatio: 0.8
 		}),
 		new CleanWebpackPlugin(
 			[Prod_Path],
@@ -49,7 +58,8 @@ module.exports = Merge(CommonConfig, {
 				keep_fnames: true
 			},
 			compress: {
-				screw_ie8: true
+				screw_ie8: true,
+				warnings: false
 			},
 			comments: false
 		})

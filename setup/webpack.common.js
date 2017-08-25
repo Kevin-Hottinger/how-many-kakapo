@@ -17,8 +17,8 @@ module.exports = {
 					{
 						loader: 'file-loader',
 						options: {
-							name: '[name].[ext]',
-							useRelativePath: true,
+							name: 'img/[name].[ext]',
+							useRelativePath: false,
 						}
 					}
 				]
@@ -33,12 +33,13 @@ module.exports = {
 			},
 			{
 				// Add babel compiler
-				test: /\.js$/,
+				test: /\.(js|jsx)$/,
 				exclude: /node_modules/,
 				use: {
 					loader: 'babel-loader',
 					options: {
 						presets: [
+							require.resolve('babel-preset-react'),
 							[
 								require.resolve('babel-preset-env'),
 							],

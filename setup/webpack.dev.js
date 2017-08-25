@@ -27,7 +27,7 @@ module.exports = Merge(CommonConfig, {
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: path.resolve(__dirname, '../src/template.ejs'),
-			inject: 'head',
+			inject: 'body',
 			minify: {
 				removeScriptTypeAttributes: true
 			}
