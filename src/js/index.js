@@ -4,5 +4,14 @@ import '../css/style.scss';
 // Include google analytics
 import './ga.js';
 
+// Include React
+import React from '../../setup/node_modules/react';
+import { render } from '../../setup/node_modules/react-dom';
 
-import './app.jsx';
+// Include Page component
+import Page from './containers/page.jsx';
+
+render(
+	<Page/>,
+	document.getElementById('content')
+);
