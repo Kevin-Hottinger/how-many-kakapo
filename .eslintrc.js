@@ -1,4 +1,5 @@
 module.exports = {
+	"parser": "./setup/node_modules/babel-eslint",
     "env": {
         "browser": true,
         "es6": true,
@@ -6,8 +7,17 @@ module.exports = {
     },
     "extends": "eslint:recommended",
     "parserOptions": {
-        "sourceType": "module"
+		"ecmaVersion": 6,
+        "sourceType": "module",
+		"ecmaFeatures": {
+			"jsx": true,
+			"modules": true,
+			"experimentalObjectRestSpread": true
+		},
     },
+	"plugins": [
+		"react"
+	],
     "rules": {
         "indent": [
             "error",
@@ -24,6 +34,9 @@ module.exports = {
         "semi": [
             "error",
             "always"
-        ]
+        ],
+		"no-unused-vars": "warn",
+		"react/jsx-uses-react": 2,
+		"react/jsx-uses-vars": 2
     }
 };
