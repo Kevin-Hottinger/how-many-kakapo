@@ -24,6 +24,19 @@ module.exports = {
 				]
 			},
 			{
+				// Copy JSON to dist
+				test: /\.json$/,
+				use: [
+					{
+						loader: 'file-loader',
+						options: {
+							name: 'json/[name].[ext]',
+							useRelativePath: false,
+						}
+					}
+				]
+			},
+			{
 				// Generate SASS and seperate into stand-alone file
 				test: /\.scss$/,
 				use: ExtractTextPlugin.extract({
@@ -39,10 +52,9 @@ module.exports = {
 					loader: 'babel-loader',
 					options: {
 						presets: [
+							require.resolve('babel-preset-env'),
+							require.resolve('babel-preset-stage-2'),
 							require.resolve('babel-preset-react'),
-							[
-								require.resolve('babel-preset-env'),
-							],
 						]
 					}
 				}
