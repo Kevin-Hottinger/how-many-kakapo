@@ -1,7 +1,11 @@
+// Include React
 import React from '../../setup/node_modules/react';
 import ReactDOM from '../../setup/node_modules/react-dom';
+// Add support for proptypes
+import PropTypes from '../../setup/node_modules/prop-types';
 
-function Kakapo_header(props) {
+// Display Header
+function KakapoHeader(props) {
 	return(
 		<header>
             <h1>How many k&#257;k&#257;p&#333; are there?</h1>
@@ -9,7 +13,8 @@ function Kakapo_header(props) {
 	);
 }
 
-function Kakapo_pic(props) {
+// Display image
+function KakapoPic(props) {
 	return(
 		<figure className="kakapo-pic">
 			<img src={require('../img/kaka_200x200.png')} alt="Photo of Sirocco"/>
@@ -28,32 +33,80 @@ function Kakapo_pic(props) {
 	);
 }
 
-function Kakapo_count(props) {
+// Display population change information
+function KakapoCount(props) {
 	return(
 		<div className="count">
 			<h2>
-				Current population: <span className="bold">153</span>
+				Current population: <span className="bold">{props.initialPopData.current_pop}</span>
 			</h2>
 			<h3>
-				Annual change: <span className="bold">-1</span>
+				Annual change: <span className="bold">{props.initialPopData.annual_change}</span>
 			</h3>
 			<h3>
-				Last change: <span className="bold">25/07/17</span>
+				Last change: <span className="bold">{props.initialPopData.last_update}</span>
 			</h3>
 		</div>
 	);
 }
 
-function Application(props) {
-	return(
-		<div className="application">
-			<Kakapo_header />
-			<div className="result">
-				<Kakapo_pic />
-				<Kakapo_count />
+// Ensure object is passed to function
+KakapoCount.propTypes = {
+	initialPopData: PropTypes.object.isRequired
+};
+
+// Our application
+class Application extends React.Component {
+
+	// Initialise state
+	state = { initialPopData: this.props.initialPopData }
+
+	// Set default prop values
+	static defaultProps = {
+		initialPopData: {
+			current_pop: 0,
+			annual_change: 0,
+			last_update: '../../..'
+		},
+	}
+
+	// Check prop types
+	static propTypes = {
+		initialPopData: PropTypes.shape({
+			current_pop: PropTypes.number.isRequired,
+			annual_change: PropTypes.number.isRequired,
+			last_update: PropTypes.string.isRequired
+		}).isRequired
+	}
+
+	// On Mount collect population data from JSON
+	componentDidMount() {
+		var that = this;
+		var url = require('../json/population_overview.json');
+
+		fetch(url).then(function(response) {
+			if (response.status >= 400) {
+				throw new Error("Bad response from server");
+			}
+			return response.json();
+		}).then(function(data) {
+			that.setState({ initialPopData: data.overview[0]});
+		});
+	}
+
+	// Render content
+	render() {
+		return(
+			<div className="application">
+				<KakapoHeader />
+				<div className="result">
+					<KakapoPic />
+				<KakapoCount initialPopData={this.state.initialPopData}/>
+				</div>
 			</div>
-		</div>
-	);
-}
+		);
+	}
+
+};
 
 ReactDOM.render(<Application/>, document.getElementById('content'));
