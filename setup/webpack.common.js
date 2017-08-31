@@ -13,6 +13,7 @@ module.exports = {
 			{
 				// Copy images to dist
 				test: /\.(png|svg|jpg|gif)$/,
+				exclude: /fonts/,
 				use: [
 					{
 						loader: 'file-loader',
@@ -31,6 +32,19 @@ module.exports = {
 						loader: 'file-loader',
 						options: {
 							name: 'json/[name].[ext]',
+							useRelativePath: false,
+						}
+					}
+				]
+			},
+			{
+				// Copy fonts to dist
+				test: /\.(eot|svg|ttf|woff|woff2)$/,
+				use: [
+					{
+						loader: 'file-loader',
+						options: {
+							name: 'font/[name].[ext]',
 							useRelativePath: false,
 						}
 					}
