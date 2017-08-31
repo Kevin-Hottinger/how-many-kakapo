@@ -13,5 +13,5 @@ import Page from './containers/page.jsx';
 
 render(
 	<Page/>,
-	document.getElementById('content')
+	document.getElementsByTagName('main')[0]
 );

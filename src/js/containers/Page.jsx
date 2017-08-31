@@ -2,15 +2,25 @@
 import React from '../../../setup/node_modules/react';
 // Add support for proptypes
 import PropTypes from '../../../setup/node_modules/prop-types';
+// Add support for react router
+import {
+	BrowserRouter,
+	Route,
+	Switch
+} from '../../../setup/node_modules/react-router-dom';
 
-// Import KakapoCount component
-import KakapoCount from '../components/KakapoCount.jsx';
-// Import KakapoHeader component
-import KakapoHeader from '../components/KakapoHeader.jsx';
-// Import KakapoPic component
-import KakapoPic from '../components/KakapoPic.jsx';
 // Import Navigation component
 import Navigation from '../components/Navigation.jsx';
+// Import Page Home component
+import HomePage from '../components/HomePage.jsx';
+// Import Page News component
+import NewsPage from '../components/NewsPage.jsx';
+// Import Page Graph component
+import GraphPage from '../components/GraphPage.jsx';
+// Import Page Share component
+import SharePage from '../components/SharePage.jsx';
+// Import Page NotFound component
+import NotFound from '../components/NotFound.jsx';
 
 // Our application
 export default class Page extends React.Component {
@@ -56,14 +66,20 @@ export default class Page extends React.Component {
 	// Render content
 	render() {
 		return(
-			<div className="application">
-				<KakapoHeader />
-				<div className="result">
-					<KakapoPic />
-					<KakapoCount initialPopData={this.state.initialPopData}/>
+			<BrowserRouter>
+				<div id="content">
+					<Switch>
+						<Route exact path="/" render= {
+							() => <HomePage initialPopData={this.state.initialPopData}/>
+						} />
+						<Route path="/news" component={NewsPage} />
+						<Route path="/graph" component={GraphPage} />
+						<Route path="/share" component={SharePage} />
+						<Route component={NotFound} />
+					</Switch>
+					<Navigation />
 				</div>
-				<Navigation />
-			</div>
+			</BrowserRouter>
 		);
 	}
 
