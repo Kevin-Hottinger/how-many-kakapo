@@ -9,6 +9,8 @@ import KakapoCount from '../components/KakapoCount.jsx';
 import KakapoHeader from '../components/KakapoHeader.jsx';
 // Import KakapoPic component
 import KakapoPic from '../components/KakapoPic.jsx';
+// Import Navigation component
+import Navigation from '../components/Navigation.jsx';
 
 // Our application
 export default class Page extends React.Component {
@@ -60,6 +62,7 @@ export default class Page extends React.Component {
 					<KakapoPic />
 					<KakapoCount initialPopData={this.state.initialPopData}/>
 				</div>
+				<Navigation />
 			</div>
 		);
 	}
