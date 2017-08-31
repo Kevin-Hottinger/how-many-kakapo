@@ -2,6 +2,15 @@ $page-background: #e0e0e0;
 $page-font: #000;
 $main-content-background: #fff;
 $main-content-border: #c6c6c6;
+$link-colour: #fff;
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+	color: $link-colour;
+	text-decoration: none;
+}
 
 body {
 	background: $page-background;
@@ -31,7 +40,7 @@ main {
 	background: $main-content-background;
 	border: 1px solid $main-content-border;
 	grid-area: content;
-	padding: 2vw;
+	padding: 2vw 2vw .5vw;
 
 	h1 {
 		font-size: 4vw;
@@ -102,7 +111,7 @@ footer {
 
 	small {
 		font-size: .6em;
-		margin: auto auto 0 auto;
+		margin: auto auto 0;
 		text-align: center;
 	}
 
@@ -113,3 +122,5 @@ footer {
 		}
 	}
 }
+
+@import 'font_awesome/font-awesome';
