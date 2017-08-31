@@ -1,5 +1,6 @@
 $nav-background: #333;
 $nav-hover: #00ff38;
+$nav-active: #cbfaa4;
 
 nav {
 	display: flex;
@@ -19,6 +20,10 @@ nav {
 	a {
 		display: block;
 		padding: 1vw 2vw;
+	}
+
+	.active {
+		color: $nav-active;
 	}
 
 	a:hover {
